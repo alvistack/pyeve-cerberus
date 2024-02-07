@@ -38,3 +38,5 @@ _build
 .idea
 .vscode/
 .devcontainer/
+
+.pybuild/
