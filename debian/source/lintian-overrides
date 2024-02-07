@@ -1,0 +1,4 @@
+python-cerberus source: file-without-copyright-information
+python-cerberus source: no-debian-changes
+python-cerberus source: source-contains-prebuilt-windows-binary
+python-cerberus source: source-package-encodes-python-version
