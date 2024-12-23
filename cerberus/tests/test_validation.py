@@ -7,6 +7,7 @@ from datetime import datetime, date
 from random import choice
 from string import ascii_lowercase
 
+import pytest
 from pytest import mark
 
 from cerberus import errors, rules_set_registry, Validator
@@ -698,7 +699,7 @@ def test_a_dict_with_valuesrules(validator):
 
 
 # TODO remove 'keyschema' as rule with the next major release
-@mark.parametrize('rule', ('keysrules', 'keyschema'))
+@pytest.mark.parametrize('rule', ('keysrules', 'keyschema'))
 def test_keysrules(rule):
     schema = {
         'a_dict_with_keysrules': {
@@ -706,8 +707,13 @@ def test_keysrules(rule):
             rule: {'type': 'string', 'regex': '[a-z]+'},
         }
     }
-    assert_success({'a_dict_with_keysrules': {'key': 'value'}}, schema=schema)
-    assert_fail({'a_dict_with_keysrules': {'KEY': 'value'}}, schema=schema)
+    if rule == "keyschema":
+        with pytest.deprecated_call():
+            assert_success({'a_dict_with_keysrules': {'key': 'value'}}, schema=schema)
+            assert_fail({'a_dict_with_keysrules': {'KEY': 'value'}}, schema=schema)
+    else:
+        assert_success({'a_dict_with_keysrules': {'key': 'value'}}, schema=schema)
+        assert_fail({'a_dict_with_keysrules': {'KEY': 'value'}}, schema=schema)
 
 
 def test_a_list_length(schema):
@@ -743,10 +749,12 @@ def test_a_list_length(schema):
 
 
 def test_custom_datatype():
-    class MyValidator(Validator):
-        def _validate_type_objectid(self, value):
-            if re.match('[a-f0-9]{24}', value):
-                return True
+    with pytest.deprecated_call():
+
+        class MyValidator(Validator):
+            def _validate_type_objectid(self, value):
+                if re.match('[a-f0-9]{24}', value):
+                    return True
 
     schema = {'test_field': {'type': 'objectid'}}
     validator = MyValidator(schema)
@@ -759,19 +767,22 @@ def test_custom_datatype():
 
 
 def test_custom_datatype_rule():
-    class MyValidator(Validator):
-        def _validate_min_number(self, min_number, field, value):
-            """{'type': 'number'}"""
-            if value < min_number:
-                self._error(field, 'Below the min')
+    with pytest.deprecated_call():
 
-        # TODO replace with TypeDefintion in next major release
-        def _validate_type_number(self, value):
-            if isinstance(value, int):
-                return True
+        class MyValidator(Validator):
+            def _validate_min_number(self, min_number, field, value):
+                """{'type': 'number'}"""
+                if value < min_number:
+                    self._error(field, 'Below the min')
+
+            # TODO replace with TypeDefintion in next major release
+            def _validate_type_number(self, value):
+                if isinstance(value, int):
+                    return True
 
     schema = {'test_field': {'min_number': 1, 'type': 'number'}}
-    validator = MyValidator(schema)
+    with pytest.warns(UserWarning):
+        validator = MyValidator(schema)
     assert_fail(
         {'test_field': '0'},
         validator=validator,
@@ -898,10 +909,12 @@ def test_unknown_keys_list_of_dicts(validator):
 def test_unknown_keys_retain_custom_rules():
     # test that allow_unknown schema respect custom validation rules.
     # https://github.com/pyeve/cerberus/issues/#66.
-    class CustomValidator(Validator):
-        def _validate_type_foo(self, value):
-            if value == "foo":
-                return True
+    with pytest.deprecated_call():
+
+        class CustomValidator(Validator):
+            def _validate_type_foo(self, value):
+                if value == "foo":
+                    return True
 
     validator = CustomValidator({})
     validator.allow_unknown = {"type": "foo"}
@@ -1165,10 +1178,11 @@ def test_validator_rule(validator):
         if not value.islower():
             error(field, 'must be lowercase')
 
-    validator.schema = {
-        'name': {'validator': validate_name},
-        'age': {'type': 'integer'},
-    }
+    with pytest.deprecated_call():
+        validator.schema = {
+            'name': {'validator': validate_name},
+            'age': {'type': 'integer'},
+        }
 
     assert_fail(
         {'name': 'ItsMe', 'age': 2},

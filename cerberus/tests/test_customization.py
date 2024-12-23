@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from pytest import mark
+import pytest
 
 import cerberus
 from cerberus.tests import assert_fail, assert_success
@@ -8,15 +8,17 @@ from cerberus.tests.conftest import sample_schema
 
 
 def test_contextual_data_preservation():
-    class InheritedValidator(cerberus.Validator):
-        def __init__(self, *args, **kwargs):
-            if 'working_dir' in kwargs:
-                self.working_dir = kwargs['working_dir']
-            super(InheritedValidator, self).__init__(*args, **kwargs)
+    with pytest.deprecated_call():
 
-        def _validate_type_test(self, value):
-            if self.working_dir:
-                return True
+        class InheritedValidator(cerberus.Validator):
+            def __init__(self, *args, **kwargs):
+                if 'working_dir' in kwargs:
+                    self.working_dir = kwargs['working_dir']
+                super(InheritedValidator, self).__init__(*args, **kwargs)
+
+            def _validate_type_test(self, value):
+                if self.working_dir:
+                    return True
 
     assert 'test' in InheritedValidator.types
     v = InheritedValidator(
@@ -45,7 +47,7 @@ def test_docstring_parsing():
 
 
 # TODO remove 'validator' as rule parameter with the next major release
-@mark.parametrize('rule', ('check_with', 'validator'))
+@pytest.mark.parametrize('rule', ('check_with', 'validator'))
 def test_check_with_method(rule):
     # https://github.com/pyeve/cerberus/issues/265
     class MyValidator(cerberus.Validator):
@@ -53,7 +55,12 @@ def test_check_with_method(rule):
             if not value & 1:
                 self._error(field, "Must be an odd number")
 
-    v = MyValidator(schema={'amount': {rule: 'oddity'}})
+    if rule == "validator":
+        with pytest.deprecated_call():
+            v = MyValidator(schema={'amount': {rule: 'oddity'}})
+    else:
+        v = MyValidator(schema={'amount': {rule: 'oddity'}})
+
     assert_success(document={'amount': 1}, validator=v)
     assert_fail(
         document={'amount': 2},
@@ -63,20 +70,32 @@ def test_check_with_method(rule):
 
 
 # TODO remove test with the next major release
-@mark.parametrize('rule', ('check_with', 'validator'))
+@pytest.mark.parametrize('rule', ('check_with', 'validator'))
 def test_validator_method(rule):
     class MyValidator(cerberus.Validator):
         def _validator_oddity(self, field, value):
             if not value & 1:
-                self._error(field, "Must be an odd number")
+                self._error(field, "Must not be an odd number")
 
-    v = MyValidator(schema={'amount': {rule: 'oddity'}})
-    assert_success(document={'amount': 1}, validator=v)
-    assert_fail(
-        document={'amount': 2},
-        validator=v,
-        error=('amount', (), cerberus.errors.CUSTOM, None, ('Must be an odd number',)),
-    )
+    if rule == "validator":
+        with pytest.deprecated_call():
+            v = MyValidator(schema={'amount': {rule: 'oddity'}})
+    else:
+        v = MyValidator(schema={'amount': {rule: 'oddity'}})
+
+    with pytest.deprecated_call():
+        assert_success(document={'amount': 1}, validator=v)
+        assert_fail(
+            document={'amount': 2},
+            validator=v,
+            error=(
+                'amount',
+                (),
+                cerberus.errors.CUSTOM,
+                None,
+                ('Must not be an odd number',),
+            ),
+        )
 
 
 def test_schema_validation_can_be_disabled_in_schema_setter():

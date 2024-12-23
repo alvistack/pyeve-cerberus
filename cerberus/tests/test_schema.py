@@ -137,7 +137,8 @@ def test_deprecated_rule_names_in_valueschema():
         },
     }
 
-    validator = Validator(schema)
+    with pytest.deprecated_call():
+        validator = Validator(schema)
 
     assert validator.schema == {
         "field_1": {

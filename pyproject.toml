@@ -47,13 +47,21 @@ dependencies = ["importlib-metadata; python_version < '3.8'"]
 Documentation = "http://docs.python-cerberus.org"
 Repository = "https://github.com/pyeve/cerberus"
 
+
+[tool.black]
+safe = true
+skip-string-normalization = true
+
+
+[tool.pytest.ini_options]
+filterwarnings = [
+    "error"
+]
+
+
 [tool.setuptools]
 include-package-data = false
 
 [tool.setuptools.packages.find]
 include = ["cerberus"]
 exclude = ["*.benchmarks", "*.tests"]
-
-[tool.black]
-safe = true
-skip-string-normalization = true
