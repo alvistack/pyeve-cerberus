@@ -31,6 +31,7 @@ classifiers = [
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Programming Language :: Python :: Implementation :: CPython",
     "Programming Language :: Python :: Implementation :: PyPy",
 ]
@@ -41,6 +42,7 @@ keywords = [
     "documents",
     "normalization"
 ]
+requires_python = ">=3.7"
 dependencies = ["importlib-metadata; python_version < '3.8'"]
 
 [project.urls]
