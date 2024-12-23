@@ -38,20 +38,6 @@ Subsequent minor versions have good chances as well. In any case, you are
 advised to run the contributed test suite on your target system.
 
 
-Funding
--------
-
-Cerberus is an open source, collaboratively funded project. If you run a
-business and are using Cerberus in a revenue-generating product, it would
-make business sense to sponsor its development: it ensures the project that
-your product relies on stays healthy and actively maintained. Individual users
-are also welcome to make a recurring pledge or a one time donation if Cerberus
-has helped you in your work or personal projects.
-
-Every single sign-up makes a significant impact towards making Eve possible. To
-learn more, check out our `funding page`_.
-
-
 Documentation
 -------------
 
@@ -101,7 +87,6 @@ for more information.
 
 .. _Contribution Guidelines: https://github.com/pyeve/cerberus/blob/1.3.x/CONTRIBUTING.rst
 .. _end of life: https://devguide.python.org/#status-of-python-branches
-.. _funding page: http://docs.python-cerberus.org/en/latest/funding.html
 .. _license: https://github.com/pyeve/cerberus/blob/1.3.x/LICENSE
 .. _Nicola Iarocci: https://nicolaiarocci.com/
 .. _PyPI: https://pypi.python.org/

@@ -1,8 +1,6 @@
 Cerberus Changelog
 ==================
 
-Cerberus is a collaboratively funded project, see the `funding page`_.
-
 Version 1.3.5
 -------------
 
@@ -650,4 +648,3 @@ Released on October 16 2012.
 First public preview release.
 
 .. _`upgrade notes`: https://docs.python-cerberus.org/upgrading.html
-.. _`funding page`: https://docs.python-cerberus.org/funding.html

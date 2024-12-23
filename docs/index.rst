@@ -27,19 +27,6 @@ a dictionary against the schema. If validation succeeds, ``True`` is returned:
     >>> v.validate(document)
     True
 
-Funding Cerberus
-----------------
-Cerberus is a :doc:`collaboratively funded project <funding>`. If you run
-a business and are using Cerberus in a revenue-generating product, it would
-make business sense to sponsor its development: it ensures the project that
-your product relies on stays healthy and actively maintained.
-
-Individual users are also welcome to make either a recurring pledge or a one
-time donation if Cerberus has helped you in your work or personal projects.
-Every single sign-up makes a significant impact towards making Cerberus
-possible.
-
-To join the backer ranks, check out `Cerberus campaign on Patreon`_.
 
 Table of Contents
 -----------------
@@ -54,7 +41,6 @@ Table of Contents
     errors
     Extending <customize>
     Contributing <contribute>
-    Funding <funding>
     API <api>
     FAQ <faq>
     external_resources

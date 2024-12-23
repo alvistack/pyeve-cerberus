@@ -12,11 +12,6 @@ Blog
 ----
 New releases are usually announced on `my Website <https://nicolaiarocci.com/tags/cerberus>`_.
 
-Twitter
--------
-I often tweet about new features and releases of Cerberus. Follow `@nicolaiarocci
-<https://twitter.com/nicolaiarocci>`_.
-
 Mailing List
 ------------
 The `mailing list`_ is intended to be a low traffic resource for users,

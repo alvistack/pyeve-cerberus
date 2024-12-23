@@ -99,11 +99,11 @@ The HTML build is triggered with:
 The result can be accessed by opening ``docs/_build/html/index.html``.
 
 
-.. _Fork: https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo
-.. _`fork and edit`: https://github.blog/2011-04-26-forking-with-the-edit-button/
+.. _Fork: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo
+.. _`fork and edit`: https://github.blog/news-insights/the-library/forking-with-the-edit-button/
 .. _pre-commit: https://pre-commit.com/
 .. _`proper format`: https://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html
-.. _`Pull Request`: https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request
+.. _`Pull Request`: https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request
 .. _pytest: https://pytest.org
 .. _repository: https://github.com/pyeve/cerberus
 .. _tox: https://tox.readthedocs.io
