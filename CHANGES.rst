@@ -1,6 +1,34 @@
 Cerberus Changelog
 ==================
 
+Version 1.3.7
+-------------
+
+Released on December 31, 2024.
+
+Fixed
+~~~~~
+
+- Amends missing changelog
+
+
+Version 1.3.6
+-------------
+
+Released on December 23, 2024.
+
+New
+~~~
+
+- Support for Python 3.12 & 3.13
+
+Fixed
+~~~~~
+
+- Escaping in docstrings (`#608`_)
+
+.. _`#608`: https://github.com/pyeve/cerberus/issues/608
+
 Version 1.3.5
 -------------
 
